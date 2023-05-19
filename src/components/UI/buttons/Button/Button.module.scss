@@ -1,0 +1,128 @@
+@import '../../../../scss/variables';
+
+.button {
+	font-family: 'Montserrat';
+	font-style: normal;
+	color: $color-dark;
+
+	&-primary,
+	&-secondary {
+		&-l {
+			width: 160px;
+			height: 52px;
+			font-weight: 600;
+			font-size: 16px;
+			line-height: 150%;
+			letter-spacing: 0.2px;
+			text-transform: uppercase;
+			border-radius: 30px;
+		}
+
+		&-s {
+			width: 120px;
+			height: 40px;
+			font-size: 12px;
+			line-height: 18px;
+			border-radius: 20px;
+		}
+	}
+
+	&-primary {
+		background: $color-primary;
+		color: $color-light;
+
+		&:hover {
+			border: 1px solid #ff740f;
+			box-shadow: 0px 2px 5px rgba(54, 54, 54, 0.1);
+		}
+
+		&:active {
+			background: $color-additional;
+			box-shadow: 0px 3px 4px rgba(222, 125, 11, 0.2), 0px 1px 10px rgba(249, 89, 8, 0.2);
+		}
+		&:disabled {
+			background: $color-black10;
+			box-shadow: none;
+			border: none;
+			cursor: default;
+		}
+	}
+
+	&-secondary {
+		background: $color-light;
+		border: 1px solid $color-black20;
+		color: $color-dark;
+
+		&:hover {
+			border-color: $color-black40;
+			box-shadow: 0px 2px 5px rgba(54, 54, 54, 0.1);
+		}
+
+		&:active {
+			box-shadow: 0px 3px 4px rgba(222, 125, 11, 0.2), 0px 1px 10px rgba(249, 89, 8, 0.2);
+		}
+
+		&:disabled {
+			background: $color-black5;
+			color: $color-black40;
+			cursor: default;
+			box-shadow: none;
+			border: 1px solid $color-black20;
+		}
+	}
+
+	&-text {
+		position: relative;
+		display: flex;
+		align-items: center;
+		width: 160px;
+		height: 24px;
+		font-weight: 600;
+		font-size: 12px;
+		line-height: 18px;
+		letter-spacing: 0.2px;
+		text-transform: uppercase;
+		color: $color-dark;
+
+		&::after {
+			position: absolute;
+			content: '';
+			margin-left: 72px;
+			width: 24px;
+			height: 24px;
+
+			background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE1IDZMMjEgMTJNMjEgMTJMMTUgMThNMjEgMTJIMyIgc3Ryb2tlPSIjQkZDNEM5IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K')
+				no-repeat;
+		}
+
+		@keyframes arrow-move {
+			0% {
+				transform: translateX(0);
+			}
+			50% {
+				transform: translateX(5px);
+			}
+			100% {
+				transform: translateX(0);
+			}
+		}
+
+		&:hover::after {
+			background: url('../../../assets/icons/chevron/arrow-right.svg');
+		}
+
+		&:active {
+			background: $color-additional;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+			text-fill-color: transparent;
+			background-clip: text;
+			text-fill-color: transparent;
+
+			&::after {
+				background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE1IDZMMjEgMTJNMjEgMTJMMTUgMThNMjEgMTJIMyIgc3Ryb2tlPSJ1cmwoI3BhaW50MF9saW5lYXJfMjYwMV8xMzc4NCkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXJfMjYwMV8xMzc4NCIgeDE9IjExLjY3NTgiIHkxPSItMTYuMzEyNSIgeDI9Ii0zNS4yNDQ3IiB5Mj0iMzkuNTA2NSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjRjgzNjAwIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0Y5RDQyMyIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=');
+			}
+		}
+	}
+}

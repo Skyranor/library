@@ -1,3 +1,7 @@
-export const App = () => {
-  return <div>App</div>;
+import AppRouter from './components/AppRouter';
+
+const App = () => {
+  return <AppRouter />;
 };
+
+export default App;
