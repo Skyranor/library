@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 
-import cl from './header.module.scss';
-import logo from '../../assets/images/logo.svg';
 import avatar from '../../assets/images/avatar.jpg';
+import logo from '../../assets/images/logo.svg';
+import cl from './header.module.scss';
 
 const Header = () => {
   return (

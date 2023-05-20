@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import cl from './BookList.module.scss';
-import CardBook from '../CardBook';
 import { Book } from '../../../models/Book';
+import CardBook from '../CardBook';
+import cl from './BookList.module.scss';
 
 const BookList = () => {
   const [books] = useState<Book[]>([

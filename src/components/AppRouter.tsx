@@ -1,10 +1,10 @@
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import { privateRoutes, publicRoutes } from '../router';
 import MainLayout from '../layouts/Main';
+import { privateRoutes, publicRoutes } from '../router';
 
 const AppRouter = () => {
-  const isAuth = true;
+  const isAuth = false;
 
   return isAuth ? (
     <Routes>

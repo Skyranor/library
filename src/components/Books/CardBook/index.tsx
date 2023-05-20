@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 
-import cl from './CardBook.module.scss';
 import bookImg from '../../../assets/images/book.jpg';
 import { ReactComponent as DefaultImg } from '../../../assets/images/card-image.svg';
-import { Button } from '../../UI/buttons';
 import { Book } from '../../../models/Book';
 import Rating from '../../Rating';
+import { Button } from '../../UI/buttons';
+import cl from './CardBook.module.scss';
 
 type CardBookProps = {
   book: Book;
