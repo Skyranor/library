@@ -1,18 +1,18 @@
 import clsx from 'clsx';
-import { FC, PropsWithChildren } from 'react';
+import { FC } from 'react';
 
 import cl from './Button.module.scss';
 
 type ButtonProps = {
   className?: string;
   isDisabled?: boolean;
-  size?: 'l' | 's';
+  size?: 'max' | 'l' | 's';
   variant?: 'primary' | 'secondary' | 'text';
   onClick?: () => void;
   children: React.ReactNode;
 };
 
-const Button: FC<PropsWithChildren<ButtonProps>> = ({
+const Button: FC<ButtonProps> = ({
   className,
   isDisabled = false,
   size = 'l',
