@@ -1,4 +1,4 @@
-import cl from './categories.module.scss';
+import cl from './Categories.module.scss';
 
 const Categories = () => {
   const categories = [

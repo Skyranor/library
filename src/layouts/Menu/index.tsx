@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 import Categories from '../../components/Categories';
-import cl from './menuLayout.module.scss';
+import cl from './MenuLayout.module.scss';
 
 const MenuLayout = ({ children }: React.PropsWithChildren) => {
   return (
