@@ -5,6 +5,8 @@
   font-style: normal;
   color: $color-dark;
   text-transform: uppercase;
+  user-select: none;
+  outline: none;
 
   &-primary,
   &-secondary {

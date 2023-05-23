@@ -1,23 +1,17 @@
 import clsx from 'clsx';
-import { FC } from 'react';
+import { ButtonHTMLAttributes, FC } from 'react';
 
 import cl from './Button.module.scss';
 
-type ButtonProps = {
-  className?: string;
-  isDisabled?: boolean;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'max' | 'l' | 's';
   variant?: 'primary' | 'secondary' | 'text';
-  onClick?: () => void;
-  children: React.ReactNode;
-};
+}
 
 const Button: FC<ButtonProps> = ({
   className,
-  isDisabled = false,
   size = 'l',
   variant = 'primary',
-  onClick = () => {},
   children,
 }) => {
   const classNames = clsx(
@@ -27,25 +21,7 @@ const Button: FC<ButtonProps> = ({
     className
   );
 
-  const handleClick = () => {
-    if (onClick && !isDisabled) {
-      onClick();
-    }
-  };
-
-  return (
-    <button type='button' className={classNames} onClick={handleClick}>
-      {children}
-    </button>
-  );
-};
-
-Button.defaultProps = {
-  className: '',
-  isDisabled: false,
-  size: 'l',
-  variant: 'primary',
-  onClick: () => {},
+  return <button className={classNames}>{children}</button>;
 };
 
 export default Button;

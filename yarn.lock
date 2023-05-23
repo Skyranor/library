@@ -610,6 +610,11 @@
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
+"@types/node@^20.2.1":
+  version "20.2.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.2.1.tgz#de559d4b33be9a808fd43372ccee822c70f39704"
+  integrity sha512-DqJociPbZP1lbZ5SQPk4oag6W7AyaGMO6gSfRwq3PWl4PXTwJpRQJhDq4W0kzrg3w6tJ1SwlvGZ5uKFHY13LIg==
+
 "@types/prop-types@*":
   version "15.7.5"
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
@@ -2082,6 +2087,18 @@ loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
+lottie-react@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/lottie-react/-/lottie-react-2.4.0.tgz#f7249eee2b1deee70457a2d142194fdf2456e4bd"
+  integrity sha512-pDJGj+AQlnlyHvOHFK7vLdsDcvbuqvwPZdMlJ360wrzGFurXeKPr8SiRCjLf3LrNYKANQtSsh5dz9UYQHuqx4w==
+  dependencies:
+    lottie-web "^5.10.2"
+
+lottie-web@^5.10.2:
+  version "5.11.0"
+  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.11.0.tgz#04bb9fd6cdfbb10e586985dd666de6c727619d95"
+  integrity sha512-9vSt0AtdOH98GKDXwD5LPfFg9Pcmxt5+1BllAbudKM5iqPxpJnJUfuGaP45OyudDrESCOBgsjnntVUTygBNlzw==
+
 lru-cache@^5.1.1:
   version "5.1.1"
   resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-5.1.1.tgz"
@@ -2361,6 +2378,11 @@ react-dom@^18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
+
+react-hook-form@^7.43.9:
+  version "7.43.9"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.43.9.tgz#84b56ac2f38f8e946c6032ccb760e13a1037c66d"
+  integrity sha512-AUDN3Pz2NSeoxQ7Hs6OhQhDr6gtF9YRuutGDwPQqhSUAHJSgGl2VeY3qN19MG0SucpjgDiuMJ4iC5T5uB+eaNQ==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"

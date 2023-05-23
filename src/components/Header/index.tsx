@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import avatar from '../../assets/images/avatar.jpg';
 import logo from '../../assets/images/logo.svg';
-import cl from './header.module.scss';
+import cl from './Header.module.scss';
 
 const Header = () => {
   return (
