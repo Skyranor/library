@@ -1,13 +1,11 @@
-import { useState } from 'react';
-
 import cl from './categories.module.scss';
 
 const Categories = () => {
-  const [categories] = useState([
+  const categories = [
     { title: 'Бизнес-книги', count: 14 },
     { title: 'Детективы', count: 8 },
     { title: 'Детские книги', count: 14 },
-  ]);
+  ];
 
   return (
     <ul className={cl.categories}>

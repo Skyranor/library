@@ -1,5 +1,6 @@
 import React from 'react';
 
+import AuthPage from '../pages/Auth';
 import MainPage from '../pages/Main';
 
 export interface Route {
@@ -8,14 +9,21 @@ export interface Route {
 }
 
 export enum RouteNames {
-  MAIN_PAGE = '/',
+  main = '/',
+  auth = '/auth',
+  registration = '/registration',
 }
 
 export const privateRoutes: Route[] = [
   {
-    path: RouteNames.MAIN_PAGE,
+    path: RouteNames.main,
     component: MainPage,
   },
 ];
 
-export const publicRoutes: Route[] = [];
+export const publicRoutes: Route[] = [
+  {
+    path: RouteNames.auth,
+    component: AuthPage,
+  },
+];

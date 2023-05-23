@@ -1,0 +1,24 @@
+@import '../../scss/variables';
+.main {
+  display: grid;
+  justify-content: center;
+  background: $color-primary;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.container {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  row-gap: 59px;
+
+  .title {
+    padding-top: 180px;
+    color: $color-light;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: 0.1px;
+  }
+}
