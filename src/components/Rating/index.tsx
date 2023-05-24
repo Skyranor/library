@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
-import cl from './rating.module.scss';
 import { ReactComponent as EmptyStar } from '../../assets/icons/empty-star.svg';
+import cl from './Rating.module.scss';
 
 type RatingProps = {
   rating: number;

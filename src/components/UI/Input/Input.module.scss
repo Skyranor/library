@@ -1,0 +1,35 @@
+@import '../../../scss/variables';
+
+.wrapper {
+  position: relative;
+  box-sizing: border-box;
+  background: $color-black5;
+  height: 56px;
+  padding: 19px 12px;
+  border-radius: 4px;
+  display: grid;
+  border-bottom: 1px solid $color-black20;
+}
+
+.input {
+  border: none;
+  outline: none;
+  background: $color-black5;
+
+  &::placeholder {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.1px;
+    color: $color-dark;
+    mix-blend-mode: normal;
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 16px;
+  cursor: pointer;
+}

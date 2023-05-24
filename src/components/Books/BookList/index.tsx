@@ -1,11 +1,9 @@
-import { useState } from 'react';
-
-import cl from './BookList.module.scss';
-import CardBook from '../CardBook';
 import { Book } from '../../../models/Book';
+import CardBook from '../CardBook';
+import cl from './BookList.module.scss';
 
 const BookList = () => {
-  const [books] = useState<Book[]>([
+  const books: Book[] = [
     {
       id: 3,
       category: 'Роман',
@@ -30,7 +28,7 @@ const BookList = () => {
       bookedTill: '',
       img: '',
     },
-  ]);
+  ];
 
   return (
     <section className={cl.bookGrid}>
