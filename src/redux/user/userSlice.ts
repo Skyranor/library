@@ -1,15 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { User } from '../../models/User';
+import { UserAPI, UserDTO } from '../../types/DTO/User';
 
-interface UserState {
-  token: string;
-  user: User;
-}
+interface UserState extends UserAPI {}
 
 const initialState: UserState = {
-  token: '',
-  user: {} as User,
+  user: {} as UserDTO,
+  jwt: '',
 };
 
 const userSlice = createSlice({
@@ -18,7 +15,7 @@ const userSlice = createSlice({
   reducers: {
     setUserData: (state, action) => {
       state.user = action.payload.user;
-      state.token = action.payload.jwt;
+      state.jwt = action.payload.jwt;
     },
     logout: () => initialState,
   },

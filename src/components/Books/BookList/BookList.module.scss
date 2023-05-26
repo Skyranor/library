@@ -1,21 +1,21 @@
 @import '../../../scss/variables';
 
-.bookGrid {
-	grid-column: 2/3;
+.booksList {
+  padding-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  justify-content: space-between;
+  gap: 24px 21.5px;
+  // }
+  @media screen and (max-width: $tablet-width) {
+    gap: 32px 35px;
+  }
+
+  @media screen and (max-width: $mobile-width) {
+    gap: 16px;
+  }
 }
 
-.booksList {
-	padding-top: 32px;
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-	justify-content: space-between;
-	gap: 24px 21.5px;
-	// }
-	@media screen and (max-width: $tablet-width) {
-		gap: 32px 35px;
-	}
-
-	@media screen and (max-width: $mobile-width) {
-		gap: 16px;
-	}
+.booksList-row {
+  grid-template-columns: 1fr;
 }

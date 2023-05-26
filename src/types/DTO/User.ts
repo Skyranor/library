@@ -1,4 +1,4 @@
-export interface User {
+export interface UserDTO {
   id: number;
   username: string;
   email: string;
@@ -10,4 +10,9 @@ export interface User {
   firstName: string;
   lastName: string;
   phone: string;
+}
+
+export interface UserAPI {
+  jwt: string;
+  user: UserDTO;
 }

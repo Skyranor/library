@@ -1,0 +1,149 @@
+@import '../../../scss/variables';
+.card {
+  box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2),
+    0px 3px 4px rgba(191, 196, 201, 0.18), 0px 1px 5px rgba(191, 196, 201, 0.24);
+}
+
+.card-column {
+  height: 470px;
+  padding: 8px 8px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2),
+    0px 3px 4px rgba(191, 196, 201, 0.18), 0px 1px 5px rgba(191, 196, 201, 0.24);
+  border-radius: 10px;
+
+  .cardImg {
+    order: -10;
+    width: 174px;
+    height: 242px;
+    border: 1px solid $color-black40;
+    border-radius: 10px;
+    margin: 0 auto;
+    background: $color-black5;
+    margin-bottom: 16px;
+
+    svg {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .description {
+    row-gap: 8px;
+    line-height: 18px;
+    letter-spacing: 0.1px;
+    flex: 1;
+    display: grid;
+    align-content: space-around;
+
+    h3 {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 18px;
+      color: $color-dark;
+
+      -ms-text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      -ms-line-clamp: 3;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      display: -webkit-box;
+      display: box;
+      word-wrap: break-word;
+      -webkit-box-orient: vertical;
+      box-orient: vertical;
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 14px;
+      color: $color-black70;
+
+      -ms-text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      -ms-line-clamp: 2;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      display: -webkit-box;
+      display: box;
+      word-wrap: break-word;
+      -webkit-box-orient: vertical;
+      box-orient: vertical;
+    }
+  }
+
+  .bookRating {
+    order: -9;
+    // column-gap: 6px !important;
+    //   column-gap: 6px;
+    svg {
+      margin-bottom: 16px;
+    }
+  }
+
+  .bookRating {
+    order: -9;
+  }
+
+  button {
+    margin-top: 19px;
+    align-self: center;
+    width: 166px;
+    height: 40px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    width: 100%;
+  }
+}
+
+.card-row {
+  display: grid;
+  grid-template-areas:
+    'cardImg description description'
+    'cardImg rating button';
+  grid-template-columns: 120px 1fr 1fr;
+  grid-template-rows: auto;
+  padding: 24px 16px;
+  column-gap: 16px;
+
+  .cardImg {
+    grid-area: cardImg;
+    height: 170px;
+  }
+
+  .description {
+    grid-area: description;
+    margin-bottom: 24px;
+
+    h3 {
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 32px;
+      color: $color-dark;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.1px;
+      color: $color-black70;
+    }
+  }
+
+  .bookRating {
+    grid-area: rating;
+  }
+
+  button {
+    grid-area: button;
+  }
+}
