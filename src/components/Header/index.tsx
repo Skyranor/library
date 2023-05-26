@@ -1,35 +1,24 @@
 import clsx from 'clsx';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import avatar from '../../assets/images/avatar.jpg';
 import logo from '../../assets/images/logo.svg';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useClickOutside } from '../../hooks';
 import { logout } from '../../redux/user/userSlice';
 import { RouteNames } from '../../router';
 import cl from './Header.module.scss';
 
 const Header = () => {
   const dispatch = useAppDispatch();
-
-  const modalRef = useRef<HTMLDivElement>(null);
   const [isModalActive, setModalActive] = useState(false);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !event.composedPath().includes(modalRef.current)
-      ) {
-        setModalActive(false);
-      }
-    };
+  const handleCloseModal = () => {
+    setModalActive(false);
+  };
 
-    document.body.addEventListener('click', handleClickOutside);
-
-    return () => document.body.removeEventListener('click', handleClickOutside);
-  }, []);
+  const modalRef = useClickOutside<HTMLDivElement>(handleCloseModal);
 
   const handleLogout = () => {
     localStorage.clear();
