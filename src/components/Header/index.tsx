@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -58,7 +59,7 @@ const Header = () => {
             {isModalActive && (
               <ul className={cl.profileModal}>
                 <li>
-                  <Link to='/profile'>Профиль</Link>
+                  <Link to={RouteNames.profile}>Профиль</Link>
                 </li>
                 <li>
                   <button onClick={handleLogout}>Выход</button>
