@@ -17,7 +17,7 @@ const MenuLayout = ({ children }: React.PropsWithChildren) => {
           </li>
         </ul>
       </nav>
-      {children}
+      <section className={cl.bookGrid}>{children}</section>
     </div>
   );
 };

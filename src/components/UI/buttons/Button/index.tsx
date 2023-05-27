@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+
 import { ButtonHTMLAttributes, FC } from 'react';
 
 import cl from './Button.module.scss';
@@ -13,6 +14,7 @@ const Button: FC<ButtonProps> = ({
   size = 'l',
   variant = 'primary',
   children,
+  ...rest
 }) => {
   const classNames = clsx(
     cl.button,
@@ -21,7 +23,11 @@ const Button: FC<ButtonProps> = ({
     className
   );
 
-  return <button className={classNames}>{children}</button>;
+  return (
+    <button {...rest} className={classNames}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;

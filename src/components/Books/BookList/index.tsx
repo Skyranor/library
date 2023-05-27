@@ -1,43 +1,22 @@
-import { Book } from '../../../models/Book';
-import CardBook from '../CardBook';
+import clsx from 'clsx';
+
+import { DisplayBook } from '../../../types';
+import { BookDTO } from '../../../types/DTO/Book';
+import BookCard from '../BookCard';
 import cl from './BookList.module.scss';
 
-const BookList = () => {
-  const books: Book[] = [
-    {
-      id: 3,
-      category: 'Роман',
-      categoryId: 3,
-      title: 'Грокаем алгоритмы. Иллюстрированное пособие для програ...',
-      author: 'Адитья Бхаргава',
-      rating: '4.3',
-      year: 2019,
-      isBooked: false,
-      bookedTill: '',
-      img: 'https://books.com/sherlockholmes.jpg',
-    },
-    {
-      id: 2,
-      category: 'Детектив',
-      categoryId: 2,
-      title: 'Грокаем алгоритмы. Иллюстрированное пособие для програ...',
-      author: 'Адитья Бхаргава',
-      rating: '',
-      year: 2019,
-      isBooked: false,
-      bookedTill: '',
-      img: '',
-    },
-  ];
-
+type BookListProps = {
+  display?: DisplayBook;
+  books: BookDTO[];
+};
+const BookList = ({ books, display = 'column' }: BookListProps) => {
   return (
-    <section className={cl.bookGrid}>
-      <ul className={cl.booksList}>
-        {books.map((book) => (
-          <CardBook key={book.id} book={book} />
+    <ul className={clsx(cl.booksList, cl[`booksList-${display}`])}>
+      {books &&
+        books.map((book) => (
+          <BookCard display={display} key={book.id} book={book} />
         ))}
-      </ul>
-    </section>
+    </ul>
   );
 };
 

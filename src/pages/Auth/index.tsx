@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -10,12 +11,8 @@ import { Button } from '../../components/UI/buttons';
 import { useAppDispatch } from '../../hooks';
 import { useLoginMutation } from '../../redux/api/apiSlice';
 import { setUserData } from '../../redux/user/userSlice';
+import { LoginFields } from '../../types';
 import cl from './Auth.module.scss';
-
-type LoginFields = {
-  identifier: string;
-  password: string;
-};
 
 const AuthPage = () => {
   const dispatch = useAppDispatch();

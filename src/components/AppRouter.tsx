@@ -19,8 +19,8 @@ const AppRouter = () => {
     setIsLoading(false);
   }, []);
 
-  const token = useAppSelector((state) => state.user.token);
-  const isAuth = Boolean(token);
+  const jwt = useAppSelector((state) => state.user.jwt);
+  const isAuth = Boolean(jwt);
 
   if (isLoading) {
     return <div>Loading...</div>;
