@@ -1,8 +1,15 @@
 @mixin template-grid {
-	display: grid;
-	grid-template-columns: 279px 1fr;
-	column-gap: 6px;
-	@media screen and (max-width: 1023px) {
-		grid-template-columns: 1fr;
-	}
+  display: grid;
+  grid-template-columns: 279px 1fr;
+  column-gap: 6px;
+  @media screen and (max-width: 1023px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+@mixin border {
+  padding-bottom: 16px;
+  margin-bottom: 15px;
+  width: 350px;
+  border-bottom: 1px solid $color-black10;
 }

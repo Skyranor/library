@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { LoginFields } from '../../types';
-import { BookDTO, CategoryDTO } from '../../types/DTO/Book';
+import { BookDTO, BookDetailsDTO, CategoryDTO } from '../../types/DTO/Book';
 import { UserAPI } from '../../types/DTO/User';
 import { RootState } from '../store';
 
@@ -32,7 +32,7 @@ const apiSlice = createApi({
       query: () => '/api/books',
     }),
 
-    getBook: builder.query<BookDTO, number>({
+    getBook: builder.query<BookDetailsDTO, string>({
       query: (id) => `/api/books/${id}`,
     }),
 
@@ -44,5 +44,10 @@ const apiSlice = createApi({
 
 export default apiSlice;
 
-export const { useLoginMutation, useGetBooksQuery, useGetCategoriesQuery } =
-  apiSlice;
+export const {
+  useLoginMutation,
+  useGetBooksQuery,
+  useGetCategoriesQuery,
+  useGetBookQuery,
+  usePrefetch,
+} = apiSlice;

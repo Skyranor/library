@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AuthPage from '../pages/Auth';
+import BookPage from '../pages/Book';
 import MainPage from '../pages/Main';
 import ProfilePage from '../pages/Profile';
 
@@ -10,10 +11,11 @@ export interface Route {
 }
 
 export enum RouteNames {
-  main = '/',
+  main = '/books',
   auth = '/auth',
   registration = '/registration',
   profile = '/profile',
+  book = '/books/:category/:id',
 }
 
 export const privateRoutes: Route[] = [
@@ -24,6 +26,10 @@ export const privateRoutes: Route[] = [
   {
     path: RouteNames.profile,
     component: ProfilePage,
+  },
+  {
+    path: RouteNames.book,
+    component: BookPage,
   },
 ];
 

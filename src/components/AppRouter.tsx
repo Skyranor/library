@@ -27,7 +27,7 @@ const AppRouter = () => {
   }
   return isAuth ? (
     <Routes>
-      <Route path={RouteNames.main} element={<MainLayout />}>
+      <Route path='/' element={<MainLayout />}>
         {privateRoutes.map((route) => (
           <Route
             key={route.path}
@@ -35,8 +35,8 @@ const AppRouter = () => {
             element={<route.component />}
           />
         ))}
+        <Route path='*' element={<Navigate to={RouteNames.main} />} />
       </Route>
-      <Route path='*' element={<Navigate to={RouteNames.main} />} />
     </Routes>
   ) : (
     <Routes>
@@ -49,6 +49,7 @@ const AppRouter = () => {
           />
         ))}
         <Route path='/' element={<Navigate to={RouteNames.auth} />} />
+        <Route path='*' element={<Navigate to={RouteNames.auth} />} />
       </Route>
     </Routes>
   );
