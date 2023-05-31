@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { LoginFields } from '../../types';
+import { Book, Category, LoginFields } from '../../types';
 import { BookDTO, BookDetailsDTO, CategoryDTO } from '../../types/DTO/Book';
 import { UserAPI } from '../../types/DTO/User';
 import { RootState } from '../store';
@@ -30,6 +30,7 @@ const apiSlice = createApi({
 
     getBooks: builder.query<BookDTO[], void>({
       query: () => '/api/books',
+      transformResponse: (response: Book[]) => response,
     }),
 
     getBook: builder.query<BookDetailsDTO, string>({
@@ -38,6 +39,15 @@ const apiSlice = createApi({
 
     getCategories: builder.query<CategoryDTO[], void>({
       query: () => '/api/categories',
+      transformResponse: (response: Category[]) => [
+        {
+          name: 'Все книги',
+          id: Date.now(),
+          booksCount: response.reduce((acc, cur) => acc + cur.booksCount, 0),
+          path: 'all',
+        },
+        ...response,
+      ],
     }),
   }),
 });

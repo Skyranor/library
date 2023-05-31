@@ -2,28 +2,20 @@
 
 .categories {
   display: grid;
-  row-gap: 16px;
-  padding-left: 20px;
+  gap: 16px;
+  padding-left: 24px;
   padding-top: 16px;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: $color-dark;
-
-  span {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 24px;
-    letter-spacing: 0.1px;
-    color: $color-black40;
-    padding-left: 6px;
-  }
 }
 
 .category {
-  margin-left: 4px;
-
   &Active {
+    margin-top: -2px;
+    margin-bottom: -2px;
+    transition: all 0.3s ease-in-out;
     font-weight: 700;
     font-size: 18px;
     line-height: 28px;
@@ -33,6 +25,17 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-fill-color: transparent;
-    margin-left: 0px;
+    transform: translateX(-4px);
   }
+}
+
+.categoryCount {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.1px;
+  padding-left: 6px;
+  color: $color-black40;
+  -webkit-text-fill-color: $color-black40;
+  text-fill-color: $color-black40;
 }

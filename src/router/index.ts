@@ -11,21 +11,26 @@ export interface Route {
 }
 
 export enum RouteNames {
-  main = '/books',
   auth = '/auth',
   registration = '/registration',
   profile = '/profile',
+  main = '/books/all',
+  books = '/books/:category',
   book = '/books/:category/:id',
 }
 
 export const privateRoutes: Route[] = [
   {
+    path: RouteNames.profile,
+    component: ProfilePage,
+  },
+  {
     path: RouteNames.main,
     component: MainPage,
   },
   {
-    path: RouteNames.profile,
-    component: ProfilePage,
+    path: RouteNames.books,
+    component: MainPage,
   },
   {
     path: RouteNames.book,

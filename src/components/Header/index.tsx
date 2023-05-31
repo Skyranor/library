@@ -1,17 +1,19 @@
 import clsx from 'clsx';
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import avatar from '../../assets/images/avatar.jpg';
 import logo from '../../assets/images/logo.svg';
 import { useAppDispatch, useClickOutside } from '../../hooks';
+import { resetFilter } from '../../redux/books/booksSlice';
 import { logout } from '../../redux/user/userSlice';
 import { RouteNames } from '../../router';
 import cl from './Header.module.scss';
 
 const Header = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [isModalActive, setModalActive] = useState(false);
 
   const handleCloseModal = () => {
@@ -25,16 +27,21 @@ const Header = () => {
     dispatch(logout());
   };
 
+  const handleClickLogo = () => {
+    //тут наверное нужно в middleware запихнуть, но я еще до этого не дошел
+    dispatch(resetFilter());
+    navigate('/books/all');
+  };
+
   return (
     <header className={cl.header}>
       <div className={clsx(cl.headerWrapper, 'wrapper')}>
-        <Link to={RouteNames.main}>
-          <img
-            className={cl.logo}
-            src={logo}
-            alt='логотип компании cleverland'
-          />
-        </Link>
+        <img
+          onClick={handleClickLogo}
+          className={cl.logo}
+          src={logo}
+          alt='логотип компании cleverland'
+        />
         <div className={cl.gridTwoColumns}>
           <h1>Библиотека</h1>
           <div className={cl.profile}>
