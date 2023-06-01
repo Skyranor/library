@@ -31,7 +31,7 @@ export interface BookDTO {
   }[];
 }
 
-export interface BookDetailsDTO extends BookDTO {
+export interface BookDetailsDTO extends Omit<BookDTO, 'image'> {
   description?: string;
   publish?: string;
   pages?: string;

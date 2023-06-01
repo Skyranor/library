@@ -1,26 +1,30 @@
 import clsx from 'clsx';
 
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { ReactComponent as DefaultImg } from '../../../assets/images/card-image.svg';
-import { DisplayBook } from '../../../types';
-import { BookDTO } from '../../../types/DTO/Book';
+import { usePrefetch } from '../../../redux/api/apiSlice';
+import { Book, DisplayBooks } from '../../../types';
 import { formatDate } from '../../../utils/formatDate';
 import Rating from '../../Rating';
 import { Button } from '../../UI/buttons';
 import cl from './BookCard.module.scss';
 
 type BookCardProps = {
-  book: BookDTO;
-  display?: DisplayBook;
+  book: Book;
+  display?: DisplayBooks;
 };
 
 const BookCard = ({ book, display = 'column' }: BookCardProps) => {
+  const prefetchBookPage = usePrefetch('getBook');
+  const { category } = useParams();
+
   return (
     <li>
       <Link
+        onMouseEnter={() => prefetchBookPage(String(book.id))}
+        to={`/books/${category}/${book.id}`}
         className={clsx(cl.card, cl[`card-${display}`])}
-        to={`/books/${book.id}`}
       >
         <div className={cl.description}>
           <h3>{book.title}</h3>
@@ -31,12 +35,12 @@ const BookCard = ({ book, display = 'column' }: BookCardProps) => {
           )}
         </div>
 
-        {!book.image ? (
+        {book.image ? (
+          <img className={cl.cardImg} src={book.image.url} alt='книга' />
+        ) : (
           <div className={cl.cardImg}>
             <DefaultImg />
           </div>
-        ) : (
-          <img className={cl.cardImg} src={book.image.url} alt='книга' />
         )}
 
         <Rating rating={Number(book.rating)} className={cl.bookRating} />

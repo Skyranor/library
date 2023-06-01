@@ -1,13 +1,12 @@
 import clsx from 'clsx';
 
-import { DisplayBook } from '../../../types';
-import { BookDTO } from '../../../types/DTO/Book';
+import { Book, DisplayBooks } from '../../../types';
 import BookCard from '../BookCard';
 import cl from './BookList.module.scss';
 
 type BookListProps = {
-  display?: DisplayBook;
-  books: BookDTO[];
+  display?: DisplayBooks;
+  books: Book[];
 };
 const BookList = ({ books, display = 'column' }: BookListProps) => {
   return (

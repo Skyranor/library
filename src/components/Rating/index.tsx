@@ -1,14 +1,10 @@
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 
 import { ReactComponent as EmptyStar } from '../../assets/icons/empty-star.svg';
 import cl from './Rating.module.scss';
 
-type RatingProps = {
-  rating: number;
-  className?: string;
-};
-
-const Rating = ({ rating, className }: RatingProps) => {
+const Rating = ({ rating = 0, className = '', isVisibleNumber = false }) => {
   return (
     <div className={clsx(cl.rating, className)}>
       {!rating ? (
@@ -23,12 +19,15 @@ const Rating = ({ rating, className }: RatingProps) => {
           </span>
         ))
       )}
+      {isVisibleNumber && <span className={cl.number}>{rating}</span>}
     </div>
   );
 };
 
-Rating.defaultProps = {
-  className: '',
+Rating.propTypes = {
+  rating: PropTypes.number,
+  className: PropTypes.string,
+  isVisibleNumber: PropTypes.bool,
 };
 
 export default Rating;
