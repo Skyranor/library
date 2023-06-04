@@ -5,6 +5,7 @@ import { ReactComponent as ColumnLayout } from '../../assets/icons/action/Square
 import BookList from '../../components/Books/BookList';
 import Search from '../../components/Search';
 import Sort from '../../components/Sort';
+import Loader from '../../components/UI/Loader';
 import { IconButton } from '../../components/UI/buttons';
 import { useAppSelector } from '../../hooks';
 import MenuLayout from '../../layouts/Menu';
@@ -21,9 +22,11 @@ import cl from './MainPage.module.scss';
 
 const MainPage = () => {
   const [layout, setLayout] = useState<DisplayBooks>('column');
-  const { isSuccess } = useGetBooksQuery();
+  const { isSuccess: isBooksSuccess, isFetching: isBooksFetching } =
+    useGetBooksQuery();
   const { category } = useAppSelector(selectActiveFilter);
-  const { data: categories } = useGetCategoriesQuery();
+  const { data: categories, isLoading: isLoadingCategories } =
+    useGetCategoriesQuery();
 
   const haveBooksInCategory = Boolean(
     categories?.find((item) => item.name === category)?.booksCount
@@ -33,6 +36,7 @@ const MainPage = () => {
 
   return (
     <MenuLayout>
+      {(isLoadingCategories || isBooksFetching) && <Loader />}
       <div className={cl.navigationList}>
         <Search />
         <Sort />
@@ -49,11 +53,12 @@ const MainPage = () => {
           />
         </div>
       </div>
+      {/* <ModalReview /> */}
       {filteredBooks && <BookList books={filteredBooks} display={layout} />}
-      {!filteredBooks.length && isSuccess && haveBooksInCategory && (
+      {!filteredBooks.length && isBooksSuccess && haveBooksInCategory && (
         <h3 className={cl.noResults}>По запросу ничего не найдено</h3>
       )}
-      {!haveBooksInCategory && isSuccess && (
+      {!haveBooksInCategory && isBooksSuccess && (
         <h3 className={cl.noBooks}>В этой категории книг ещё нет</h3>
       )}
     </MenuLayout>

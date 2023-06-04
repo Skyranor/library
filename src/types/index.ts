@@ -31,3 +31,21 @@ export interface Category {
   path: string;
   booksCount: number;
 }
+
+export interface Booking {
+  data: {
+    order: boolean;
+    dateOrder: string;
+    book: string;
+    customer: string;
+  };
+}
+
+export interface Comment {
+  data: {
+    rating: number;
+    text: string;
+    book: string;
+    user: string;
+  };
+}

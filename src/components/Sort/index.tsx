@@ -10,7 +10,7 @@ const Sort = () => {
   const { sort } = useAppSelector(selectActiveFilter);
 
   const handleClickSort = () => {
-    sort === 'desc' ? dispatch(setSort('asc')) : dispatch(setSort('desc'));
+    dispatch(setSort(sort === 'asc' ? 'desc' : 'asc'));
   };
 
   return (
