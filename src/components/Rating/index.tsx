@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 import { ReactComponent as EmptyStar } from '../../assets/icons/empty-star.svg';
 import cl from './Rating.module.scss';
 
-const Rating = ({ rating = 0, className = '', isVisibleNumber = false }) => {
+const Rating = ({
+  rating = 0,
+  className = '',
+  isVisibleNumber = false,
+  callback = (n: number) => {},
+}) => {
   return (
     <div className={clsx(cl.rating, className)}>
       {!rating ? (
@@ -15,7 +20,7 @@ const Rating = ({ rating = 0, className = '', isVisibleNumber = false }) => {
             key={star}
             className={Math.round(rating) >= star ? cl.active : ''}
           >
-            <EmptyStar />
+            <EmptyStar onClick={() => callback(star)} />
           </span>
         ))
       )}
@@ -28,6 +33,7 @@ Rating.propTypes = {
   rating: PropTypes.number,
   className: PropTypes.string,
   isVisibleNumber: PropTypes.bool,
+  setActiveStars: PropTypes.func,
 };
 
 export default Rating;

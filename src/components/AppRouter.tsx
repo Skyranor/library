@@ -6,6 +6,7 @@ import AuthLayout from '../layouts/Auth';
 import MainLayout from '../layouts/Main';
 import { setUserData } from '../redux/user/userSlice';
 import { RouteNames, privateRoutes, publicRoutes } from '../router';
+import Loader from './UI/Loader';
 
 const AppRouter = () => {
   const dispatch = useAppDispatch();
@@ -23,8 +24,9 @@ const AppRouter = () => {
   const isAuth = Boolean(jwt);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
+
   return isAuth ? (
     <Routes>
       <Route path='/' element={<MainLayout />}>

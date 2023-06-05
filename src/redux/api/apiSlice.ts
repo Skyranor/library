@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { Book, Category, LoginFields } from '../../types';
+import { Book, Booking, Category, LoginFields } from '../../types';
 import { BookDTO, BookDetailsDTO, CategoryDTO } from '../../types/DTO/Book';
-import { UserAPI } from '../../types/DTO/User';
+import { UserAPI, UserDTO } from '../../types/DTO/User';
 import { RootState } from '../store';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -19,6 +19,7 @@ const apiSlice = createApi({
       return headers;
     },
   }),
+  tagTypes: ['User', 'Book', 'Books'],
   endpoints: (builder) => ({
     login: builder.mutation<UserAPI, LoginFields>({
       query: (credentials) => ({
@@ -27,14 +28,20 @@ const apiSlice = createApi({
         body: credentials,
       }),
     }),
+    getUserData: builder.query<UserDTO, void>({
+      query: () => '/api/users/me',
+      providesTags: ['User'],
+    }),
 
     getBooks: builder.query<BookDTO[], void>({
       query: () => '/api/books',
       transformResponse: (response: Book[]) => response,
+      providesTags: ['Books'],
     }),
 
     getBook: builder.query<BookDetailsDTO, string>({
       query: (id) => `/api/books/${id}`,
+      providesTags: ['Book'],
     }),
 
     getCategories: builder.query<CategoryDTO[], void>({
@@ -49,15 +56,34 @@ const apiSlice = createApi({
         ...response,
       ],
     }),
+
+    reserveBook: builder.mutation<any, Booking>({
+      query: (bookingData) => ({
+        url: '/api/bookings',
+        method: 'POST',
+        body: bookingData,
+      }),
+      invalidatesTags: ['Books', 'Book', 'User'],
+    }),
+
+    cancelBooking: builder.mutation<any, string>({
+      query: (id) => ({
+        url: `/api/bookings/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Books', 'Book', 'User'],
+    }),
   }),
 });
-
 export default apiSlice;
 
 export const {
+  usePrefetch,
   useLoginMutation,
+  useGetUserDataQuery,
   useGetBooksQuery,
   useGetCategoriesQuery,
   useGetBookQuery,
-  usePrefetch,
+  useReserveBookMutation,
+  useCancelBookingMutation,
 } = apiSlice;

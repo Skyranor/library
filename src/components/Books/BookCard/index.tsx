@@ -1,60 +1,80 @@
 import clsx from 'clsx';
 
+import { MouseEvent } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { ReactComponent as DefaultImg } from '../../../assets/images/card-image.svg';
 import { usePrefetch } from '../../../redux/api/apiSlice';
-import { Book, DisplayBooks } from '../../../types';
-import { formatDate } from '../../../utils/formatDate';
+import { DisplayBooks } from '../../../types';
 import Rating from '../../Rating';
 import { Button } from '../../UI/buttons';
 import cl from './BookCard.module.scss';
 
 type BookCardProps = {
-  book: Book;
+  id: number;
+  rating?: number;
+  title: string;
+  authors?: string[];
+  imageUrl?: string;
+  issueYear?: string;
+  isBooking?: boolean;
+  dateOrder?: string;
   display?: DisplayBooks;
+  buttonText: string;
+  buttonVariant?: 'primary' | 'secondary' | 'text';
+  onClick: (e: MouseEvent, id: number) => void;
 };
 
-const BookCard = ({ book, display = 'column' }: BookCardProps) => {
-  const prefetchBookPage = usePrefetch('getBook');
+const BookCard = ({
+  display = 'column',
+  buttonVariant = 'primary',
+  id,
+  rating,
+  title,
+  authors,
+  imageUrl,
+  issueYear,
+  isBooking,
+  dateOrder,
+  buttonText,
+  onClick,
+}: BookCardProps) => {
+  // const prefetchBookPage = usePrefetch('getBook');
   const { category } = useParams();
 
   return (
     <li>
       <Link
-        onMouseEnter={() => prefetchBookPage(String(book.id))}
-        to={`/books/${category}/${book.id}`}
+        // onMouseEnter={() => prefetchBookPage(String(id))}
+        to={`/books/${category}/${id}`}
         className={clsx(cl.card, cl[`card-${display}`])}
       >
         <div className={cl.description}>
-          <h3>{book.title}</h3>
-          {book.authors && (
+          <h3>{title}</h3>
+          {authors && (
             <p>
-              {book.authors.join(', ')}, {book.issueYear}
+              {authors.join(', ')}, {issueYear}
             </p>
           )}
         </div>
 
-        {book.image ? (
-          <img className={cl.cardImg} src={book.image.url} alt='книга' />
+        {imageUrl ? (
+          <img className={cl.cardImg} src={imageUrl} alt='книга' />
         ) : (
           <div className={cl.cardImg}>
             <DefaultImg />
           </div>
         )}
 
-        <Rating rating={Number(book.rating)} className={cl.bookRating} />
+        <Rating rating={rating} className={cl.bookRating} />
         <Button
-          onClick={(e) => {
-            e.preventDefault();
-          }}
-          disabled={book.booking?.order}
-          variant={book.booking?.order ? 'secondary' : 'primary'}
+          disabled={isBooking}
+          onClick={(e) => onClick(e, id)}
+          variant={buttonVariant}
           size='max'
+          className={cl.btn}
         >
-          {book.booking?.dateOrder
-            ? `Занята до ${formatDate(book.booking.dateOrder)}`
-            : 'Забронировать'}
+          {buttonText}
         </Button>
       </Link>
     </li>

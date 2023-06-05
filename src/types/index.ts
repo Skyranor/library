@@ -18,10 +18,10 @@ export interface Book {
   booking?: {
     id: number;
     order: boolean;
-    dateOrder?: string;
-    customerId?: number;
-    customerFirstName?: string;
-    customerLastName?: string;
+    dateOrder: string;
+    customerId: number;
+    customerFirstName: string;
+    customerLastName: string;
   };
 }
 
@@ -30,4 +30,22 @@ export interface Category {
   name: string;
   path: string;
   booksCount: number;
+}
+
+export interface Booking {
+  data: {
+    order: boolean;
+    dateOrder: string;
+    book: string;
+    customer: string;
+  };
+}
+
+export interface Comment {
+  data: {
+    rating: number;
+    text: string;
+    book: string;
+    user: string;
+  };
 }

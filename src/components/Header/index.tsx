@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import avatar from '../../assets/images/avatar.jpg';
 import logo from '../../assets/images/logo.svg';
 import { useAppDispatch, useClickOutside } from '../../hooks';
+import { useGetUserDataQuery } from '../../redux/api/apiSlice';
 import { resetFilter } from '../../redux/books/booksSlice';
 import { logout } from '../../redux/user/userSlice';
 import { RouteNames } from '../../router';
@@ -15,6 +16,7 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isModalActive, setModalActive] = useState(false);
+  const { data: user } = useGetUserDataQuery();
 
   const handleCloseModal = () => {
     setModalActive(false);
@@ -45,7 +47,7 @@ const Header = () => {
         <div className={cl.gridTwoColumns}>
           <h1>Библиотека</h1>
           <div className={cl.profile}>
-            <span>Привет, Иван!</span>
+            <span>Привет, {user?.firstName}!</span>
             <div
               onClick={() => setModalActive(!isModalActive)}
               ref={modalRef}

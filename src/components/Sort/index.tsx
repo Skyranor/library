@@ -8,9 +8,10 @@ import cl from './Sort.module.scss';
 const Sort = () => {
   const dispatch = useAppDispatch();
   const { sort } = useAppSelector(selectActiveFilter);
+  const sortType = sort === 'asc' ? 'desc' : 'asc';
 
   const handleClickSort = () => {
-    sort === 'desc' ? dispatch(setSort('asc')) : dispatch(setSort('desc'));
+    dispatch(setSort(sortType));
   };
 
   return (
