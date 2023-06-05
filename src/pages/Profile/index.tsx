@@ -7,9 +7,9 @@ import avatar from '../../assets/images/avatar.jpg';
 import BookCard from '../../components/Books/BookCard';
 import Loader from '../../components/UI/Loader';
 import {
+  useCancelBookingMutation,
   useGetUserDataQuery,
   usePrefetch,
-  useRemoveBookingMutation,
 } from '../../redux/api/apiSlice';
 import cl from './ProfilePage.module.scss';
 
@@ -24,8 +24,8 @@ const ProfilePage = () => {
 
   const [
     removeBooking,
-    { isSuccess: isRemoveBookingSuccess, isLoading: isRemoveBookingLoading },
-  ] = useRemoveBookingMutation();
+    { isSuccess: isCancelBookingSuccess, isLoading: isCancelBookingLoading },
+  ] = useCancelBookingMutation();
 
   const handleCancelBooking = async (e: MouseEvent) => {
     try {
@@ -41,7 +41,7 @@ const ProfilePage = () => {
 
   return (
     <div className={clsx('wrapper', cl.profileWrapper)}>
-      {(isUserFetching || isRemoveBookingLoading) && <Loader />}
+      {(isUserFetching || isCancelBookingLoading) && <Loader />}
       {isUserSuccess && (
         <>
           <div className={cl.user}>
@@ -57,7 +57,7 @@ const ProfilePage = () => {
               отменить бронь
             </p>
 
-            {user.booking.book && !isRemoveBookingSuccess ? (
+            {user.booking.book && !isCancelBookingSuccess ? (
               <BookCard
                 display='row'
                 id={user.booking.book.id}

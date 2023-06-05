@@ -18,10 +18,10 @@ export interface Book {
   booking?: {
     id: number;
     order: boolean;
-    dateOrder?: string;
-    customerId?: number;
-    customerFirstName?: string;
-    customerLastName?: string;
+    dateOrder: string;
+    customerId: number;
+    customerFirstName: string;
+    customerLastName: string;
   };
 }
 
