@@ -39,13 +39,13 @@ const BookCard = ({
   buttonText,
   onClick,
 }: BookCardProps) => {
-  const prefetchBookPage = usePrefetch('getBook');
+  // const prefetchBookPage = usePrefetch('getBook');
   const { category } = useParams();
 
   return (
     <li>
       <Link
-        onMouseEnter={() => prefetchBookPage(String(id))}
+        // onMouseEnter={() => prefetchBookPage(String(id))}
         to={`/books/${category}/${id}`}
         className={clsx(cl.card, cl[`card-${display}`])}
       >
@@ -76,7 +76,6 @@ const BookCard = ({
         >
           {buttonText}
         </Button>
-        {}
       </Link>
     </li>
   );

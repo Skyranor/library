@@ -7,22 +7,27 @@ import 'dayjs/locale/ru';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { useBookingMutation, useGetUserDataQuery } from '../redux/api/apiSlice';
+import {
+  useGetUserDataQuery,
+  useReserveBookMutation,
+} from '../redux/api/apiSlice';
 import { availableDefaultDate } from '../utils/availableDefaultDate';
 import { disabledDate } from '../utils/disabledDate';
 import Loader from './UI/Loader';
 import Modal from './UI/Modal';
 
 interface CalendarModalProps {
-  setCloseModal: () => void;
+  onClose: () => void;
   id: number;
 }
 
-const CalendarModal = ({ setCloseModal, id }: CalendarModalProps) => {
+const CalendarModal = ({ onClose, id }: CalendarModalProps) => {
   const [selectedDate, setSelectedDate] =
     useState<string>(availableDefaultDate);
 
-  const [booking, { isLoading: isLoadingBooking }] = useBookingMutation();
+  const [booking, { isLoading: isLoadingReserveBook }] =
+    useReserveBookMutation();
+
   const { data: user } = useGetUserDataQuery();
 
   const handleChangeDate = (value: Dayjs) => {
@@ -30,7 +35,7 @@ const CalendarModal = ({ setCloseModal, id }: CalendarModalProps) => {
   };
 
   const handleBooking = async () => {
-    if (selectedDate) {
+    if (selectedDate && user) {
       try {
         await booking({
           data: {
@@ -44,7 +49,7 @@ const CalendarModal = ({ setCloseModal, id }: CalendarModalProps) => {
           'Книга забронирована. Подробности можно посмотреть на странице Профиль',
           {}
         );
-        setCloseModal();
+        onClose();
       } catch (error) {
         console.error(error);
         toast.error(
@@ -65,12 +70,12 @@ const CalendarModal = ({ setCloseModal, id }: CalendarModalProps) => {
 
   return (
     <ConfigProvider locale={locale}>
-      {isLoadingBooking && <Loader />}
+      {isLoadingReserveBook && <Loader />}
       <Modal
         onClick={handleBooking}
         title='Выбор даты бронирования'
         buttonText='Забронировать'
-        setCloseModal={setCloseModal}
+        setCloseModal={onClose}
       >
         <Calendar
           defaultValue={dayjs(selectedDate)}

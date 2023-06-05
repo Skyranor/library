@@ -9,7 +9,13 @@ export interface UserRegisterDTO {
   phone: string;
 }
 
-export interface UserLoginDTO extends UserRegisterDTO {
+export interface UserLoginDTO {
+  email: string;
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
   id: number;
   provider: string;
   confirmed: boolean;

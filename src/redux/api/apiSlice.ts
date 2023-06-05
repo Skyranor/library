@@ -57,7 +57,7 @@ const apiSlice = createApi({
       ],
     }),
 
-    booking: builder.mutation<any, Booking>({
+    reserveBook: builder.mutation<any, Booking>({
       query: (bookingData) => ({
         url: '/api/bookings',
         method: 'POST',
@@ -66,7 +66,7 @@ const apiSlice = createApi({
       invalidatesTags: ['Books', 'Book', 'User'],
     }),
 
-    removeBooking: builder.mutation<any, string>({
+    cancelBooking: builder.mutation<any, string>({
       query: (id) => ({
         url: `/api/bookings/${id}`,
         method: 'DELETE',
@@ -84,6 +84,6 @@ export const {
   useGetBooksQuery,
   useGetCategoriesQuery,
   useGetBookQuery,
-  useBookingMutation,
-  useRemoveBookingMutation,
+  useReserveBookMutation,
+  useCancelBookingMutation,
 } = apiSlice;

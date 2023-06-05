@@ -11,10 +11,10 @@ export interface BookDTO {
   booking?: {
     id: number;
     order: boolean;
-    dateOrder?: string;
-    customerId?: number;
-    customerFirstName?: string;
-    customerLastName?: string;
+    dateOrder: string;
+    customerId: number;
+    customerFirstName: string;
+    customerLastName: string;
   };
   delivery?: {
     id: number;

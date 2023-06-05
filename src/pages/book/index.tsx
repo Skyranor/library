@@ -9,16 +9,17 @@ import Rating from '../../components/Rating';
 import Loader from '../../components/UI/Loader';
 import { Button } from '../../components/UI/buttons';
 import { useGetBookQuery } from '../../redux/api/apiSlice';
+import { formatDate } from '../../utils/formatDate';
 import cl from './BookPage.module.scss';
 
 const BookPage = () => {
   const { id = '' } = useParams();
   const { data: book, isFetching } = useGetBookQuery(id);
 
-  const [isModalActive, setModalActive] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleCloseModal = () => {
-    setModalActive(false);
+    setModalOpen(false);
   };
 
   useEffect(() => {
@@ -44,16 +45,17 @@ const BookPage = () => {
             </span>
             <Button
               onClick={() => {
-                setModalActive(true);
+                setModalOpen(true);
               }}
               disabled={book.booking?.order}
               variant={book.booking?.order ? 'secondary' : 'primary'}
             >
-              {book.booking?.dateOrder ? 'Забронирована' : 'Забронировать'}
+              {book.booking?.dateOrder
+                ? `Забронирована до ${formatDate(book.booking.dateOrder)}`
+                : 'Забронировать'}
             </Button>
             <div className={cl.description}>
               <h3>О книге</h3>
-
               {book.description?.split('\\n').map((item) => (
                 <p key={item}>{item}</p>
               ))}
@@ -124,8 +126,8 @@ const BookPage = () => {
           </section>
         </div>
       )}
-      {isModalActive && book?.id && (
-        <CalendarModal id={book.id} setCloseModal={handleCloseModal} />
+      {isModalOpen && book?.id && (
+        <CalendarModal id={book.id} onClose={handleCloseModal} />
       )}
     </div>
   );
