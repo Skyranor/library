@@ -23,14 +23,14 @@ const ProfilePage = () => {
   } = useGetUserDataQuery();
 
   const [
-    removeBooking,
+    cancelBooking,
     { isSuccess: isCancelBookingSuccess, isLoading: isCancelBookingLoading },
   ] = useCancelBookingMutation();
 
   const handleCancelBooking = async (e: MouseEvent) => {
     try {
       e.preventDefault();
-      await removeBooking(String(user?.booking?.id));
+      await cancelBooking(String(user?.booking?.id));
       toast.success('Бронь отменена');
       prefetchBooks();
     } catch (error) {
