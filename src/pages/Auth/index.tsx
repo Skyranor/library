@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as IconEyeClosed } from '../../assets/icons/action/EyeClosed.svg';
 import { ReactComponent as IconEyeOpen } from '../../assets/icons/action/EyeOpen.svg';
@@ -11,11 +12,13 @@ import { Button } from '../../components/UI/buttons';
 import { useAppDispatch } from '../../hooks';
 import { useLoginMutation } from '../../redux/api/apiSlice';
 import { setUserData } from '../../redux/user/userSlice';
+import { RouteNames } from '../../router';
 import { LoginFields } from '../../types';
 import cl from './Auth.module.scss';
 
 const AuthPage = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -37,6 +40,11 @@ const AuthPage = () => {
 
   const onSubmit: SubmitHandler<LoginFields> = (formData) => {
     login(formData);
+  };
+
+  const handleNavigation = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    navigate(RouteNames.registration);
   };
 
   return (
@@ -77,7 +85,9 @@ const AuthPage = () => {
         </Button>
         <div className={cl.redirect}>
           <span>Нет учетной записи?</span>
-          <Button variant='text'>Регистрация</Button>
+          <Button onClick={handleNavigation} variant='text'>
+            Регистрация
+          </Button>
         </div>
       </form>
       {isLoading && <div className={cl.blur} />}

@@ -4,6 +4,7 @@ import AuthPage from '../pages/Auth';
 import BookPage from '../pages/Book';
 import MainPage from '../pages/Main';
 import ProfilePage from '../pages/Profile';
+import RegistrationPage from '../pages/Registration';
 
 export interface Route {
   path: string;
@@ -42,5 +43,9 @@ export const publicRoutes: Route[] = [
   {
     path: RouteNames.auth,
     component: AuthPage,
+  },
+  {
+    path: RouteNames.registration,
+    component: RegistrationPage,
   },
 ];
