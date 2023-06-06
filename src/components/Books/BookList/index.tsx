@@ -48,15 +48,12 @@ const BookList = ({ books, display = 'column' }: BookListProps) => {
               dateOrder={book.booking?.dateOrder}
               onClick={handleBooking}
               buttonText={
-                book.booking?.customerId === userData.id
-                  ? `Забронирована до ${formatDate(book.booking.dateOrder)}`
-                  : 'Забронировать'
+                (book.booking?.customerId === userData.id && `Забронирована`) ||
+                (book.booking &&
+                  `Занята до ${formatDate(book.booking.dateOrder)}`) ||
+                'Забронировать'
               }
-              buttonVariant={
-                book.booking?.customerId === userData.id
-                  ? 'secondary'
-                  : 'primary'
-              }
+              buttonVariant={book.booking ? 'secondary' : 'primary'}
             />
           ))}
       </ul>
