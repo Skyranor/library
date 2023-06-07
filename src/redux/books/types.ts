@@ -6,10 +6,10 @@ export interface BooksState extends EntityState<BookDTO> {
   activeFilter: ActiveFilter;
 }
 
-interface ActiveFilter {
+export interface ActiveFilter {
   category: string;
   searchValue: string;
-  sort: Sort;
+  sort: SortType;
 }
 
-export type Sort = 'desc' | 'asc';
+export type SortType = 'desc' | 'asc';

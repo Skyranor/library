@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { ReactComponent as RowLayout } from '../../assets/icons/action/Menu.svg';
 import { ReactComponent as ColumnLayout } from '../../assets/icons/action/Square-four.svg';
@@ -7,32 +8,84 @@ import Search from '../../components/Search';
 import Sort from '../../components/Sort';
 import Loader from '../../components/UI/Loader';
 import { IconButton } from '../../components/UI/buttons';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import MenuLayout from '../../layouts/Menu';
 import {
   useGetBooksQuery,
   useGetCategoriesQuery,
 } from '../../redux/api/apiSlice';
 import {
+  setCategory,
+  setSearchValue,
+  setSort,
+} from '../../redux/books/booksSlice';
+import {
   selectActiveFilter,
   selectFilteredBooks,
 } from '../../redux/books/selectors';
+import { SortType } from '../../redux/books/types';
 import { DisplayBooks } from '../../types';
 import cl from './MainPage.module.scss';
 
 const MainPage = () => {
+  const dispatch = useAppDispatch();
   const [layout, setLayout] = useState<DisplayBooks>('column');
+
   const { isSuccess: isBooksSuccess, isFetching: isBooksFetching } =
     useGetBooksQuery();
-  const { category } = useAppSelector(selectActiveFilter);
   const { data: categories, isLoading: isLoadingCategories } =
     useGetCategoriesQuery();
 
-  const haveBooksInCategory = Boolean(
+  const { category, sort, searchValue } = useAppSelector(selectActiveFilter);
+  const booksToDisplay = useAppSelector(selectFilteredBooks);
+
+  const booksInCategoryExist = Boolean(
     categories?.find((item) => item.name === category)?.booksCount
   );
 
-  const filteredBooks = useAppSelector(selectFilteredBooks);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const selectedCategory = searchParams.get('category');
+  const selectedSort = searchParams.get('sort') as SortType;
+  const selectedSearch = searchParams.get('searchValue');
+
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    if (
+      !isMounted.current &&
+      (selectedCategory || selectedSort || selectedSearch)
+    ) {
+      if (selectedCategory) {
+        dispatch(setCategory(selectedCategory));
+      }
+      if (selectedSort) {
+        dispatch(setSort(selectedSort));
+      }
+      if (selectedSearch) {
+        dispatch(setSearchValue(selectedSearch));
+      }
+    }
+
+    isMounted.current = true;
+  }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (category && category !== 'Все книги') {
+      params.set('category', category);
+    }
+    if (sort && sort !== 'desc') {
+      params.set('sort', sort);
+    }
+    if (searchValue) {
+      params.set('searchValue', searchValue);
+    }
+
+    if (params) {
+      setSearchParams(params);
+    }
+  }, [category, sort, searchValue, setSearchParams]);
 
   return (
     <MenuLayout>
@@ -53,12 +106,11 @@ const MainPage = () => {
           />
         </div>
       </div>
-      {/* <ModalReview /> */}
-      {filteredBooks && <BookList books={filteredBooks} display={layout} />}
-      {!filteredBooks.length && isBooksSuccess && haveBooksInCategory && (
+      {booksToDisplay && <BookList books={booksToDisplay} display={layout} />}
+      {!booksToDisplay.length && isBooksSuccess && booksInCategoryExist && (
         <h3 className={cl.noResults}>По запросу ничего не найдено</h3>
       )}
-      {!haveBooksInCategory && isBooksSuccess && (
+      {!booksInCategoryExist && isBooksSuccess && (
         <h3 className={cl.noBooks}>В этой категории книг ещё нет</h3>
       )}
     </MenuLayout>

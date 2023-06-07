@@ -15,8 +15,7 @@ export enum RouteNames {
   auth = '/auth',
   registration = '/registration',
   profile = '/profile',
-  main = '/books/all',
-  books = '/books/:category',
+  main = '/books',
   book = '/books/:category/:id',
 }
 
@@ -27,10 +26,6 @@ export const privateRoutes: Route[] = [
   },
   {
     path: RouteNames.main,
-    component: MainPage,
-  },
-  {
-    path: RouteNames.books,
     component: MainPage,
   },
   {

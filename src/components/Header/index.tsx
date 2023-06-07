@@ -32,7 +32,7 @@ const Header = () => {
   const handleClickLogo = () => {
     //тут наверное нужно в middleware запихнуть, но я еще до этого не дошел
     dispatch(resetFilter());
-    navigate('/books/all');
+    navigate(RouteNames.main);
   };
 
   return (

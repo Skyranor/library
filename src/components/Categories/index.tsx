@@ -1,7 +1,5 @@
 import clsx from 'clsx';
 
-import { Link } from 'react-router-dom';
-
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useGetCategoriesQuery } from '../../redux/api/apiSlice';
 import { setCategory } from '../../redux/books/booksSlice';
@@ -29,12 +27,10 @@ const Categories = () => {
             )}
             key={item.id}
           >
-            <Link to={`/books/${item.path}`}>
-              {item.name}
-              {item.path !== 'all' && (
-                <span className={cl.categoryCount}>{item.booksCount}</span>
-              )}
-            </Link>
+            {item.name}
+            {item.path !== 'all' && (
+              <span className={cl.categoryCount}>{item.booksCount}</span>
+            )}
           </li>
         ))}
     </ul>

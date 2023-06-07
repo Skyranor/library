@@ -40,7 +40,7 @@ const BookCard = ({
   onClick,
 }: BookCardProps) => {
   // const prefetchBookPage = usePrefetch('getBook');
-  const { category } = useParams();
+  const { category = 'all' } = useParams();
 
   return (
     <li>
