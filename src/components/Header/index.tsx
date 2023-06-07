@@ -1,11 +1,12 @@
 import clsx from 'clsx';
 
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
+import { ScreenWidthContext } from '../../Context/ScreenWidthContext';
 import avatar from '../../assets/images/avatar.jpg';
 import logo from '../../assets/images/logo.svg';
-import { useAppDispatch, useClickOutside } from '../../hooks';
+import { ScreenWidth, useAppDispatch, useClickOutside } from '../../hooks';
 import { useGetUserDataQuery } from '../../redux/api/apiSlice';
 import { resetFilter } from '../../redux/books/booksSlice';
 import { logout } from '../../redux/user/userSlice';
@@ -15,6 +16,10 @@ import cl from './Header.module.scss';
 const Header = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const screenWidth = useContext(ScreenWidthContext);
+
   const [isModalActive, setModalActive] = useState(false);
   const { data: user } = useGetUserDataQuery();
 
@@ -43,7 +48,13 @@ const Header = () => {
           alt='логотип компании cleverland'
         />
         <div className={cl.gridTwoColumns}>
-          <h1>Библиотека</h1>
+          {screenWidth >= ScreenWidth.LAPTOP &&
+            (pathname === RouteNames.profile ? (
+              <h1>Профиль</h1>
+            ) : (
+              <h1>Библиотека</h1>
+            ))}
+
           <div className={cl.profile}>
             <span>Привет, {user?.firstName}!</span>
             <div
