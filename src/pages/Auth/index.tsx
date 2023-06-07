@@ -27,7 +27,6 @@ const AuthPage = () => {
   useEffect(() => {
     if (isSuccess) {
       dispatch(setUserData(data));
-      localStorage.setItem('user', JSON.stringify(data));
     }
   }, [isSuccess]);
 

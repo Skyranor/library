@@ -25,12 +25,10 @@ const Header = () => {
   const modalRef = useClickOutside<HTMLDivElement>(handleCloseModal);
 
   const handleLogout = () => {
-    localStorage.clear();
     dispatch(logout());
   };
 
   const handleClickLogo = () => {
-    //тут наверное нужно в middleware запихнуть, но я еще до этого не дошел
     dispatch(resetFilter());
     navigate(RouteNames.main);
   };

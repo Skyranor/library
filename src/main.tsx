@@ -9,6 +9,8 @@ import App from './App';
 import store from './redux/store';
 import './scss/index.scss';
 
+store.dispatch({ type: 'initialAction' });
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>

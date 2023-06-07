@@ -1,33 +1,14 @@
-import { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAppSelector } from '../hooks';
 import AuthLayout from '../layouts/Auth';
 import MainLayout from '../layouts/Main';
-import { setUserData } from '../redux/user/userSlice';
 import { RouteNames, privateRoutes, publicRoutes } from '../router';
-import Loader from './UI/Loader';
 
 const AppRouter = () => {
-  const dispatch = useAppDispatch();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      dispatch(setUserData(JSON.parse(userData)));
-    }
-    setIsLoading(false);
-  }, []);
-
   const jwt = useAppSelector((state) => state.user.jwt);
-  const isAuth = Boolean(jwt);
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  return isAuth ? (
+  return jwt ? (
     <Routes>
       <Route path='/' element={<MainLayout />}>
         {privateRoutes.map((route) => (
