@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { lazy } from 'react';
 
-import AuthPage from '../pages/Auth';
-import BookPage from '../pages/Book';
-import MainPage from '../pages/Main';
-import ProfilePage from '../pages/Profile';
-import RegistrationPage from '../pages/Registration';
+const AuthPage = lazy(() => import('../pages/Auth'));
+const RegistrationPage = lazy(() => import('../pages/Registration'));
+const MainPage = lazy(() => import('../pages/Main'));
+const BookPage = lazy(() => import('../pages/Book'));
+const ProfilePage = lazy(() => import('../pages/Profile'));
 
 export interface Route {
   path: string;
