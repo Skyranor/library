@@ -6,6 +6,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import App from './App';
+import ErrorBoundary from './ErrorBoundary';
+import Loader from './components/UI/Loader';
 import store from './redux/store';
 import './scss/index.scss';
 
@@ -13,13 +15,15 @@ store.dispatch({ type: 'initialAction' });
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Suspense>
-          <App />
-        </Suspense>
-        <ToastContainer />
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <ErrorBoundary>
+        <Provider store={store}>
+          <Suspense fallback={<Loader />}>
+            <App />
+          </Suspense>
+          <ToastContainer />
+        </Provider>
+      </ErrorBoundary>
+    </BrowserRouter>
   </React.StrictMode>
 );

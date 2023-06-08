@@ -1,0 +1,23 @@
+@import '../scss/variables';
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.errorHeading {
+  font-size: 24px;
+  font-weight: bold;
+  color: $color-negative;
+  margin-bottom: 16px;
+}
+
+.errorMessage {
+  font-size: 16px;
+  color: $color-dark;
+  text-align: center;
+  max-width: 400px;
+}
