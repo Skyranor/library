@@ -122,7 +122,7 @@ const RegistrationPage = () => {
           <Input
             {...register('phone', {
               required: true,
-              pattern: /^(?:\+375|375)?(?:44|33|25)\d{7}$/,
+              pattern: /^(?:\+375|375)?(?:44|33|25|29)\d{7}$/,
             })}
             placeholder='Номер телефона'
             className={clsx(cl.input, errors?.phone && cl.inputError)}
