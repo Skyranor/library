@@ -89,7 +89,6 @@
     position: relative;
     display: flex;
     align-items: center;
-    width: 160px;
     height: 24px;
     font-weight: 600;
     font-size: 12px;
@@ -102,8 +101,7 @@
       content: '';
       width: 24px;
       height: 24px;
-      right: 12px;
-
+      right: 0;
       background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE1IDZMMjEgMTJNMjEgMTJMMTUgMThNMjEgMTJIMyIgc3Ryb2tlPSIjQkZDNEM5IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K')
         no-repeat;
     }
@@ -122,6 +120,7 @@
 
     &:hover::after {
       background: url('../../../../assets/icons/chevron/arrow-right.svg');
+      animation: arrow-move 1s;
     }
 
     &:active {
