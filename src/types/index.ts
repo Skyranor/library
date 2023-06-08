@@ -53,7 +53,7 @@ export interface Booking {
 export interface Comment {
   data: {
     rating: number;
-    text: string;
+    text?: string;
     book: string;
     user: string;
   };

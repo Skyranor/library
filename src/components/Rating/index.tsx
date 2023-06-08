@@ -5,14 +5,14 @@ import { ReactComponent as EmptyStar } from '../../assets/icons/empty-star.svg';
 import cl from './Rating.module.scss';
 
 const Rating = ({
-  rating = 0,
+  rating,
   className = '',
   isVisibleNumber = false,
-  callback = (n: number) => {},
+  setCountActiveStars = (n: number) => {},
 }) => {
   return (
     <div className={clsx(cl.rating, className)}>
-      {!rating ? (
+      {rating === null ? (
         <span className={cl.noReview}>ещё нет оценок</span>
       ) : (
         [1, 2, 3, 4, 5].map((star) => (
@@ -20,7 +20,7 @@ const Rating = ({
             key={star}
             className={Math.round(rating) >= star ? cl.active : ''}
           >
-            <EmptyStar onClick={() => callback(star)} />
+            <EmptyStar onClick={() => setCountActiveStars(star)} />
           </span>
         ))
       )}
@@ -33,7 +33,10 @@ Rating.propTypes = {
   rating: PropTypes.number,
   className: PropTypes.string,
   isVisibleNumber: PropTypes.bool,
-  setActiveStars: PropTypes.func,
+  setCountActiveStars: PropTypes.func,
 };
 
+Rating.defaultProps = {
+  rating: null,
+};
 export default Rating;

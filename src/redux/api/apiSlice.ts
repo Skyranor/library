@@ -4,6 +4,7 @@ import {
   Book,
   Booking,
   Category,
+  Comment,
   LoginFields,
   RegisterFields,
 } from '../../types';
@@ -89,6 +90,15 @@ const apiSlice = createApi({
       }),
       invalidatesTags: ['Books', 'Book', 'User'],
     }),
+
+    addFeedback: builder.mutation<void, Comment>({
+      query: (comment) => ({
+        url: '/api/comments',
+        method: 'POST',
+        body: comment,
+      }),
+      invalidatesTags: ['Book'],
+    }),
   }),
 });
 export default apiSlice;
@@ -103,4 +113,5 @@ export const {
   useGetBookQuery,
   useReserveBookMutation,
   useCancelBookingMutation,
+  useAddFeedbackMutation,
 } = apiSlice;

@@ -17,25 +17,27 @@ interface FeedbacksProps {
   }[];
 }
 
-export const Feedbacks = ({ feedbacks }: FeedbacksProps) => (
-  <div className={cl.feedbacks}>
-    {feedbacks.map((feedback) => (
-      <div key={feedback.user.commentUserId} className={cl.feedback}>
-        <div className={cl.author}>
-          <img
-            src={feedback.user.avatarUrl || avatar}
-            alt={'аватар пользователя'}
-          />
-          <span>
-            {feedback.user.firstName} {feedback.user.lastName}
-          </span>
-          <time dateTime={feedback.createdAt}>
-            {new Date(feedback.createdAt).toLocaleDateString('ru-RU')}
-          </time>
+export const Feedbacks = ({ feedbacks }: FeedbacksProps) => {
+  return (
+    <div className={cl.feedbacks}>
+      {feedbacks.map((feedback) => (
+        <div key={feedback.user.commentUserId} className={cl.feedback}>
+          <div className={cl.author}>
+            <img
+              src={feedback.user.avatarUrl || avatar}
+              alt={'аватар пользователя'}
+            />
+            <span>
+              {feedback.user.firstName} {feedback.user.lastName}
+            </span>
+            <time dateTime={feedback.createdAt}>
+              {new Date(feedback.createdAt).toLocaleDateString('ru-RU')}
+            </time>
+          </div>
+          <Rating rating={feedback.rating} />
+          {feedback.text && <p className={cl.text}>{feedback.text}</p>}
         </div>
-        <Rating rating={feedback.rating} />
-        {feedback.text && <p className={cl.text}>{feedback.text}</p>}
-      </div>
-    ))}
-  </div>
-);
+      ))}
+    </div>
+  );
+};
