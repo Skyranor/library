@@ -3,7 +3,7 @@ import React, { lazy } from 'react';
 const AuthPage = lazy(() => import('../pages/Auth'));
 const RegistrationPage = lazy(() => import('../pages/Registration'));
 const MainPage = lazy(() => import('../pages/Main'));
-const BookPage = lazy(() => import('../pages/Book'));
+const BookPage = lazy(() => import('../pages/BookPage'));
 const ProfilePage = lazy(() => import('../pages/Profile'));
 
 export interface Route {
