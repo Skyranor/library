@@ -3,7 +3,9 @@ export function formatDate(jsonDate: string): string {
   let month = (date.getMonth() + 1).toString();
   let day = date.getDate().toString();
 
-  // Добавляем ведущий ноль, если месяц или день состоят из одной цифры
+  /**
+   * Добавляем ведущий ноль, если месяц или день состоят из одной цифры
+   */
   if (month.length === 1) {
     month = '0' + month;
   }
