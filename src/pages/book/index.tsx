@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import { ReactComponent as DefaultImg } from '../../assets/images/card-image.svg';
 import CalendarModal from '../../components/BookingCalendar';
+import { Feedbacks } from '../../components/Feedbacks';
 import Rating from '../../components/Rating';
 import Loader from '../../components/UI/Loader';
 import { Button } from '../../components/UI/buttons';
@@ -124,7 +125,8 @@ const BookPage = () => {
               <h3>Отзывы</h3>
               <span>{book.comments?.length}</span>
             </div>
-            {/* <Button className={cl.btn}>оценить книгу</Button> */}
+            {book.comments && <Feedbacks feedbacks={book.comments} />}
+            <Button className={cl.btn}>оценить книгу</Button>
           </section>
         </div>
       )}

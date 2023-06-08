@@ -43,18 +43,20 @@ export interface BookDetailsDTO extends Omit<BookDTO, 'image'> {
   images?: {
     url: string;
   }[];
-  comments?: {
-    rating: number;
-    createdAt: string;
-    id?: number;
-    text?: string;
-    user?: {
-      commentUserId: number;
-      firstName: string;
-      lastName: string;
-      avatarUrl?: string;
-    };
-  }[];
+  comments?: CommentDTO[];
+}
+
+export interface CommentDTO {
+  rating: number;
+  createdAt: string;
+  id?: number;
+  text?: string;
+  user: {
+    commentUserId: number;
+    firstName: string;
+    lastName: string;
+    avatarUrl?: string;
+  };
 }
 
 export interface CategoryDTO {
