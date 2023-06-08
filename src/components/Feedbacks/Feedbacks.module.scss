@@ -3,6 +3,14 @@
 .feedbacks {
   display: grid;
   row-gap: 42px;
+
+  button {
+    width: 350px;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
 }
 
 .feedback {
