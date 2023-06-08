@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import api from './api/apiSlice';
 import books from './books/booksSlice';
+import { authenticationMiddleware } from './middlewares/authenticationMiddleware';
 import user from './user/userSlice';
 
 const store = configureStore({
@@ -11,7 +12,7 @@ const store = configureStore({
     books,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
+    getDefaultMiddleware().concat(api.middleware, authenticationMiddleware),
 });
 
 export default store;

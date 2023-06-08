@@ -7,6 +7,9 @@
   text-transform: uppercase;
   user-select: none;
   outline: none;
+  padding: 14px;
+  display: grid;
+  place-content: center;
 
   &-primary,
   &-secondary {

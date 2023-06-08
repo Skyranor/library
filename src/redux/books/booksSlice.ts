@@ -6,7 +6,7 @@ import {
 
 import { BookDTO } from '../../types/DTO/Book';
 import apiSlice from '../api/apiSlice';
-import { BooksState, Sort } from './types';
+import { BooksState, SortType } from './types';
 
 export const booksAdapter = createEntityAdapter<BookDTO>({
   selectId: (book) => book.id,
@@ -36,7 +36,7 @@ const booksSlice = createSlice({
     setSearchValue: (state, action: PayloadAction<string>) => {
       state.activeFilter.searchValue = action.payload;
     },
-    setSort: (state, action: PayloadAction<Sort>) => {
+    setSort: (state, action: PayloadAction<SortType>) => {
       state.activeFilter.sort = action.payload;
     },
 

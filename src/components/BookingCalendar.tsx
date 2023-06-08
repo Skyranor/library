@@ -25,7 +25,7 @@ const CalendarModal = ({ onClose, id }: CalendarModalProps) => {
   const [selectedDate, setSelectedDate] =
     useState<string>(availableDefaultDate);
 
-  const [booking, { isLoading: isLoadingReserveBook }] =
+  const [reserveBook, { isLoading: isLoadingReserveBook }] =
     useReserveBookMutation();
 
   const { data: user } = useGetUserDataQuery();
@@ -34,10 +34,10 @@ const CalendarModal = ({ onClose, id }: CalendarModalProps) => {
     setSelectedDate(value.format('YYYY-MM-DD'));
   };
 
-  const handleBooking = async () => {
+  const handleReserveBook = async () => {
     if (selectedDate && user) {
       try {
-        await booking({
+        await reserveBook({
           data: {
             order: true,
             book: String(id),
@@ -72,10 +72,10 @@ const CalendarModal = ({ onClose, id }: CalendarModalProps) => {
     <ConfigProvider locale={locale}>
       {isLoadingReserveBook && <Loader />}
       <Modal
-        onClick={handleBooking}
+        onClick={handleReserveBook}
         title='Выбор даты бронирования'
         buttonText='Забронировать'
-        setCloseModal={onClose}
+        onClose={onClose}
       >
         <Calendar
           defaultValue={dayjs(selectedDate)}

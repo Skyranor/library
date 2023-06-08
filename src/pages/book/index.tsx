@@ -5,22 +5,30 @@ import { useParams } from 'react-router-dom';
 
 import { ReactComponent as DefaultImg } from '../../assets/images/card-image.svg';
 import CalendarModal from '../../components/BookingCalendar';
+import { Feedbacks } from '../../components/Feedbacks';
+import AddFeedback from '../../components/Feedbacks/AddFeedback';
 import Rating from '../../components/Rating';
 import Loader from '../../components/UI/Loader';
 import { Button } from '../../components/UI/buttons';
-import { useGetBookQuery } from '../../redux/api/apiSlice';
+import { useGetBookQuery, useGetUserDataQuery } from '../../redux/api/apiSlice';
 import { formatDate } from '../../utils/formatDate';
 import cl from './BookPage.module.scss';
 
 const BookPage = () => {
   const { id = '' } = useParams();
   const { data: book, isFetching } = useGetBookQuery(id);
+  const { data: userData } = useGetUserDataQuery();
 
-  const [isModalOpen, setModalOpen] = useState(false);
+  let hasUserFeedback: boolean | undefined = false;
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
+  if (book && userData) {
+    hasUserFeedback = book.comments?.some(
+      (comment) => comment.user.commentUserId === userData?.id
+    );
+  }
+
+  const [isCalendarModalOpen, setCalendarModalOpen] = useState(false);
+  const [isFeedbackModalOpen, setFeedbackModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -29,7 +37,7 @@ const BookPage = () => {
   return (
     <div className={cl.product}>
       {isFetching && <Loader />}
-      {book && (
+      {book && userData && (
         <div className={clsx(cl.productWrapper, 'wrapper')}>
           <section className={cl.about}>
             {book.images ? (
@@ -45,14 +53,15 @@ const BookPage = () => {
             </span>
             <Button
               onClick={() => {
-                setModalOpen(true);
+                setCalendarModalOpen(true);
               }}
               disabled={book.booking?.order}
               variant={book.booking?.order ? 'secondary' : 'primary'}
             >
-              {book.booking?.dateOrder
-                ? `Забронирована до ${formatDate(book.booking.dateOrder)}`
-                : 'Забронировать'}
+              {(book.booking?.customerId === userData.id && `Забронирована`) ||
+                (book.booking &&
+                  `Занята до ${formatDate(book.booking.dateOrder)}`) ||
+                'Забронировать'}
             </Button>
             <div className={cl.description}>
               <h3>О книге</h3>
@@ -122,12 +131,31 @@ const BookPage = () => {
               <h3>Отзывы</h3>
               <span>{book.comments?.length}</span>
             </div>
-            {/* <Button className={cl.btn}>оценить книгу</Button> */}
+            {book.comments && <Feedbacks feedbacks={book.comments} />}
+            {!hasUserFeedback && (
+              <Button
+                onClick={() => setFeedbackModalOpen(true)}
+                className={cl.btn}
+              >
+                оценить книгу
+              </Button>
+            )}
           </section>
         </div>
       )}
-      {isModalOpen && book?.id && (
-        <CalendarModal id={book.id} onClose={handleCloseModal} />
+      {isCalendarModalOpen && book && (
+        <CalendarModal
+          id={book.id}
+          onClose={() => setCalendarModalOpen(false)}
+        />
+      )}
+
+      {isFeedbackModalOpen && book && userData && (
+        <AddFeedback
+          bookId={String(book.id)}
+          userId={String(userData.id)}
+          onClose={() => setFeedbackModalOpen(false)}
+        />
       )}
     </div>
   );

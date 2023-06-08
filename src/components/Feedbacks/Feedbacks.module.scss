@@ -1,0 +1,40 @@
+@import '../../scss/variables';
+
+.feedbacks {
+  display: grid;
+  row-gap: 42px;
+
+  button {
+    width: 350px;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}
+
+.feedback {
+  display: grid;
+  row-gap: 16px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.1px;
+  color: $color-dark;
+}
+
+.author {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+  column-gap: 24px;
+
+  img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}

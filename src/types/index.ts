@@ -3,6 +3,15 @@ export interface LoginFields {
   password: string;
 }
 
+export interface RegisterFields {
+  email: string;
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+}
+
 export type DisplayBooks = 'row' | 'column';
 
 export interface Book {
@@ -44,7 +53,7 @@ export interface Booking {
 export interface Comment {
   data: {
     rating: number;
-    text: string;
+    text?: string;
     book: string;
     user: string;
   };

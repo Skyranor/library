@@ -5,7 +5,7 @@ import cl from './Modal.module.scss';
 interface ModalProps {
   title: string;
   buttonText: string;
-  setCloseModal: () => void;
+  onClose: () => void;
   children: React.ReactNode;
   onClick?: () => void;
 }
@@ -13,7 +13,7 @@ interface ModalProps {
 const Modal = ({
   buttonText,
   title,
-  setCloseModal,
+  onClose,
   children,
   onClick,
 }: ModalProps) => {
@@ -31,7 +31,7 @@ const Modal = ({
           {buttonText}
         </Button>
         <IconButton
-          onClick={setCloseModal}
+          onClick={onClose}
           className={cl.modalCloseBtn}
           icon={<CloseIcon />}
         />

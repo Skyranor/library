@@ -1,6 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { Book, Booking, Category, LoginFields } from '../../types';
+import {
+  Book,
+  Booking,
+  Category,
+  Comment,
+  LoginFields,
+  RegisterFields,
+} from '../../types';
 import { BookDTO, BookDetailsDTO, CategoryDTO } from '../../types/DTO/Book';
 import { UserAPI, UserDTO } from '../../types/DTO/User';
 import { RootState } from '../store';
@@ -21,13 +28,23 @@ const apiSlice = createApi({
   }),
   tagTypes: ['User', 'Book', 'Books'],
   endpoints: (builder) => ({
+    register: builder.mutation<void, RegisterFields>({
+      query: (credentials) => ({
+        url: '/api/auth/local/register',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
+
     login: builder.mutation<UserAPI, LoginFields>({
       query: (credentials) => ({
         url: '/api/auth/local',
         method: 'POST',
         body: credentials,
       }),
+      invalidatesTags: ['User', 'Books', 'Book'],
     }),
+
     getUserData: builder.query<UserDTO, void>({
       query: () => '/api/users/me',
       providesTags: ['User'],
@@ -57,7 +74,7 @@ const apiSlice = createApi({
       ],
     }),
 
-    reserveBook: builder.mutation<any, Booking>({
+    reserveBook: builder.mutation<void, Booking>({
       query: (bookingData) => ({
         url: '/api/bookings',
         method: 'POST',
@@ -66,12 +83,21 @@ const apiSlice = createApi({
       invalidatesTags: ['Books', 'Book', 'User'],
     }),
 
-    cancelBooking: builder.mutation<any, string>({
+    cancelBooking: builder.mutation<void, string>({
       query: (id) => ({
         url: `/api/bookings/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Books', 'Book', 'User'],
+    }),
+
+    addFeedback: builder.mutation<void, Comment>({
+      query: (comment) => ({
+        url: '/api/comments',
+        method: 'POST',
+        body: comment,
+      }),
+      invalidatesTags: ['Book'],
     }),
   }),
 });
@@ -79,6 +105,7 @@ export default apiSlice;
 
 export const {
   usePrefetch,
+  useRegisterMutation,
   useLoginMutation,
   useGetUserDataQuery,
   useGetBooksQuery,
@@ -86,4 +113,5 @@ export const {
   useGetBookQuery,
   useReserveBookMutation,
   useCancelBookingMutation,
+  useAddFeedbackMutation,
 } = apiSlice;

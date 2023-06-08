@@ -1,41 +1,5 @@
 @import '../../scss/variables';
 
-// .rating {
-//   display: flex;
-//   column-gap: 6px;
-//   align-items: flex-start;
-
-//   span {
-//     font-weight: 400;
-//     font-size: 14px;
-//     line-height: 18px;
-//     letter-spacing: 0.1px;
-//     color: $color-black40;
-//   }
-
-//   & .active {
-//     width: 24px;
-//     height: 24px;
-
-//     span {
-//       margin-bottom: 22px;
-//     }
-
-//     svg {
-//       fill: $color-warning;
-//     }
-//   }
-
-//   .number {
-//     font-weight: 700;
-//     font-size: 18px;
-//     line-height: 28px;
-//     letter-spacing: 0.1px;
-//     color: $color-dark;
-//     margin-left: 24px;
-//   }
-// }
-
 .rating {
   display: flex;
   column-gap: 12px;

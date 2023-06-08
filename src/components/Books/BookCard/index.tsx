@@ -4,7 +4,6 @@ import { MouseEvent } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { ReactComponent as DefaultImg } from '../../../assets/images/card-image.svg';
-import { usePrefetch } from '../../../redux/api/apiSlice';
 import { DisplayBooks } from '../../../types';
 import Rating from '../../Rating';
 import { Button } from '../../UI/buttons';
@@ -35,17 +34,14 @@ const BookCard = ({
   imageUrl,
   issueYear,
   isBooking,
-  dateOrder,
   buttonText,
   onClick,
 }: BookCardProps) => {
-  // const prefetchBookPage = usePrefetch('getBook');
-  const { category } = useParams();
+  const { category = 'all' } = useParams();
 
   return (
     <li>
       <Link
-        // onMouseEnter={() => prefetchBookPage(String(id))}
         to={`/books/${category}/${id}`}
         className={clsx(cl.card, cl[`card-${display}`])}
       >
