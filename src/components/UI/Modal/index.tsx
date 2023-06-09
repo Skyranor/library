@@ -8,10 +8,12 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   onClick?: () => void;
+  buttonDisabled?: boolean;
 }
 
 const Modal = ({
   buttonText,
+  buttonDisabled = false,
   title,
   onClose,
   children,
@@ -27,6 +29,7 @@ const Modal = ({
           className={cl.modalBtn}
           variant='primary'
           size='max'
+          disabled={buttonDisabled}
         >
           {buttonText}
         </Button>

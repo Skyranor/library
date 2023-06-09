@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -22,7 +22,8 @@ const RegistrationPage = () => {
 
   const [isShowPassword, setIsShowPassword] = useState(false);
 
-  const handleNavigationToAuth = () => {
+  const handleNavigationToAuth = (e: MouseEvent) => {
+    e.preventDefault();
     navigate(RouteNames.auth);
   };
 
