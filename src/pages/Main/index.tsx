@@ -13,6 +13,7 @@ import MenuLayout from '../../layouts/Menu';
 import {
   useGetBooksQuery,
   useGetCategoriesQuery,
+  useGetUserDataQuery,
 } from '../../redux/api/apiSlice';
 import {
   setCategory,
@@ -31,10 +32,17 @@ const MainPage = () => {
   const dispatch = useAppDispatch();
   const [layout, setLayout] = useState<DisplayBooks>('column');
 
-  const { isSuccess: isBooksSuccess, isFetching: isBooksFetching } =
-    useGetBooksQuery();
-  const { data: categories, isLoading: isLoadingCategories } =
-    useGetCategoriesQuery();
+  const {
+    isSuccess: isBooksSuccess,
+    isFetching: isBooksFetching,
+    error: booksError,
+  } = useGetBooksQuery();
+  const {
+    data: categories,
+    isLoading: isLoadingCategories,
+    error: categoriesError,
+  } = useGetCategoriesQuery();
+  const { isLoading: isUserDataLoading } = useGetUserDataQuery();
 
   const { category, sort, searchValue } = useAppSelector(selectActiveFilter);
   const booksToDisplay = useAppSelector(selectFilteredBooks);
@@ -87,9 +95,16 @@ const MainPage = () => {
     }
   }, [category, sort, searchValue, setSearchParams]);
 
+  if (booksError || categoriesError) {
+    console.error(booksError || categoriesError);
+    throw booksError || categoriesError;
+  }
+
   return (
     <MenuLayout>
-      {(isLoadingCategories || isBooksFetching) && <Loader />}
+      {(isLoadingCategories || isBooksFetching || isUserDataLoading) && (
+        <Loader />
+      )}
       <div className={cl.navigationList}>
         <Search />
         <Sort />

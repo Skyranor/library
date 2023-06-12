@@ -49,6 +49,7 @@ const AddFeedback = ({ onClose, userId, bookId }: AddFeedbackProps) => {
         title='Оцените книгу'
         buttonText='Оценить'
         onClose={onClose}
+        buttonDisabled={!countActiveStars}
       >
         <div className={cl.container}>
           <div className={cl.rating}>

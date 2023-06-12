@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -22,7 +22,8 @@ const RegistrationPage = () => {
 
   const [isShowPassword, setIsShowPassword] = useState(false);
 
-  const handleNavigationToAuth = () => {
+  const handleNavigationToAuth = (e: MouseEvent) => {
+    e.preventDefault();
     navigate(RouteNames.auth);
   };
 
@@ -122,7 +123,7 @@ const RegistrationPage = () => {
           <Input
             {...register('phone', {
               required: true,
-              pattern: /^(?:\+375|375)?(?:44|33|25)\d{7}$/,
+              pattern: /^(?:\+375|375)?(?:44|33|25|29)\d{7}$/,
             })}
             placeholder='Номер телефона'
             className={clsx(cl.input, errors?.phone && cl.inputError)}

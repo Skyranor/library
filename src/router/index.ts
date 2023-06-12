@@ -1,7 +1,8 @@
 import React, { lazy } from 'react';
 
-const AuthPage = lazy(() => import('../pages/Auth'));
-const RegistrationPage = lazy(() => import('../pages/Registration'));
+import AuthPage from '../pages/Auth';
+import RegistrationPage from '../pages/Registration';
+
 const MainPage = lazy(() => import('../pages/Main'));
 const BookPage = lazy(() => import('../pages/BookPage'));
 const ProfilePage = lazy(() => import('../pages/Profile'));
