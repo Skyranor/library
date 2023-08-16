@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,7 +15,7 @@ store.dispatch({ type: 'initialAction' });
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <ErrorBoundary>
         <Provider store={store}>
           <Suspense fallback={<Loader />}>
@@ -24,6 +24,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <ToastContainer />
         </Provider>
       </ErrorBoundary>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
